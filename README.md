@@ -22,7 +22,7 @@ npm run dev
 
 5. Have fun!
 
-![](screenshot.png)
+![](public/assets/screenshot.png)
 
 # Pixi Shapes
 
