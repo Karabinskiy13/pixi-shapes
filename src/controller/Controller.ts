@@ -5,12 +5,23 @@ import { ShapeType } from "../model/ShapeType";
 import { Ticker } from "pixi.js";
 import { UIOverlay } from "../view/UIOverlay.ts";
 import { ShapeFactory } from "../model/ShapeFactory.ts";
+import { getElement } from "../utils/getElement.ts";
 
 export class GameController {
   private readonly store = new ShapeStore();
   private readonly views = new Map<string, ShapeView>();
   private readonly pixi: PixiView;
-  private readonly ui = new UIOverlay();
+  private readonly ui = new UIOverlay({
+    countEl: getElement("shapes-count"),
+    areaEl: getElement("shapes-area"),
+    rateEl: getElement("shapes-rate"),
+    gravityEl: getElement("gravity-value"),
+
+    rateIncBtn: getElement("shapes-inc"),
+    rateDecBtn: getElement("shapes-dec"),
+    gravityIncBtn: getElement("gravity-inc"),
+    gravityDecBtn: getElement("gravity-dec"),
+  });
 
   private shapesPerSecond = 1;
   private spawnAccumulator = 0;
@@ -77,7 +88,7 @@ export class GameController {
       }
     });
     this.store.getAll().forEach((shape) => {
-      this.views.get(shape.id)?.draw(shape);
+      this.views.get(shape.id)?.update(shape);
     });
     this.ui.updateStats(this.store.getCount(), this.store.getTotalArea());
   };

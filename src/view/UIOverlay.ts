@@ -1,42 +1,44 @@
-export class UIOverlay {
-  private countEl = document.getElementById("shapes-count")!;
-  private areaEl = document.getElementById("shapes-area")!;
-  private rateEl = document.getElementById("shapes-rate")!;
-  private gravityEl = document.getElementById("gravity-value")!;
+import { UIOverlayElements } from "./UIOverlayElements.ts";
 
+export class UIOverlay {
   onRateIncrease?: () => void;
   onRateDecrease?: () => void;
   onGravityIncrease?: () => void;
   onGravityDecrease?: () => void;
 
-  constructor() {
-    document
-      .getElementById("shapes-inc")!
-      .addEventListener("click", () => this.onRateIncrease?.());
+  constructor(private readonly elements: UIOverlayElements) {
+    this.bindEvents();
+  }
 
-    document
-      .getElementById("shapes-dec")!
-      .addEventListener("click", () => this.onRateDecrease?.());
-
-    document
-      .getElementById("gravity-inc")!
-      .addEventListener("click", () => this.onGravityIncrease?.());
-
-    document
-      .getElementById("gravity-dec")!
-      .addEventListener("click", () => this.onGravityDecrease?.());
+  private bindEvents(): void {
+    this.elements.rateIncBtn?.addEventListener("click", () =>
+      this.onRateIncrease?.(),
+    );
+    this.elements.rateDecBtn?.addEventListener("click", () =>
+      this.onRateDecrease?.(),
+    );
+    this.elements.gravityIncBtn?.addEventListener("click", () =>
+      this.onGravityIncrease?.(),
+    );
+    this.elements.gravityDecBtn?.addEventListener("click", () =>
+      this.onGravityDecrease?.(),
+    );
   }
 
   updateStats(count: number, area: number): void {
-    this.countEl.textContent = String(count);
-    this.areaEl.textContent = area.toFixed(0);
+    if (this.elements.countEl)
+      this.elements.countEl.textContent = String(count);
+    if (this.elements.areaEl)
+      this.elements.areaEl.textContent = area.toFixed(0);
   }
 
   updateRate(rate: number): void {
-    this.rateEl.textContent = String(rate);
+    if (this.elements.rateEl) this.elements.rateEl.textContent = String(rate);
   }
 
   updateGravity(gravity: number): void {
-    this.gravityEl.textContent = gravity.toFixed(2);
+    if (this.elements.gravityEl) {
+      this.elements.gravityEl.textContent = gravity.toFixed(2);
+    }
   }
 }

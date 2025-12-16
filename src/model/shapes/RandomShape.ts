@@ -9,8 +9,8 @@ export class RandomShape extends Shape {
     x: number,
     y: number,
     color: number,
-    pointsCount = 8,
-    baseRadius = 20,
+    baseRadius: number,
+    pointsCount: number,
   ) {
     super(ShapeType.Random, x, y, color);
 

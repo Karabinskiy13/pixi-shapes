@@ -4,6 +4,7 @@ import { ShapeType } from "../model/ShapeType";
 import { Circle } from "../model/shapes/Circle";
 import { Polygon } from "../model/shapes/Polygon";
 import { Ellipse } from "../model/shapes/Ellipse";
+import { Rectangle } from "../model/shapes/Rectangle";
 import { RandomShape } from "../model/shapes/RandomShape.ts";
 
 export class ShapeView {
@@ -42,6 +43,10 @@ export class ShapeView {
         this.drawEllipse(shape as Ellipse);
         break;
 
+      case ShapeType.Rectangle:
+        this.drawRectangle(shape as Rectangle);
+        break;
+
       case ShapeType.Random:
         this.drawRandom(shape as RandomShape);
         break;
@@ -50,12 +55,16 @@ export class ShapeView {
         this.drawPolygon(shape as Polygon);
     }
 
+    this.graphics.tint = shape.color;
+  }
+
+  update(shape: Shape): void {
     this.graphics.x = shape.x;
     this.graphics.y = shape.y;
   }
 
   private drawCircle(shape: Circle): void {
-    this.graphics.circle(0, 0, shape.radius).fill({ color: shape.color });
+    this.graphics.circle(0, 0, shape.radius).fill({ color: 0xffffff });
   }
 
   private drawPolygon(shape: Polygon): void {
@@ -69,16 +78,22 @@ export class ShapeView {
       );
     }
 
-    this.graphics.poly(points).fill({ color: shape.color });
+    this.graphics.poly(points).fill({ color: 0xffffff });
+  }
+
+  private drawRectangle(shape: Rectangle): void {
+    this.graphics
+      .rect(-shape.width / 2, -shape.height / 2, shape.width, shape.height)
+      .fill({ color: 0xffffff });
   }
 
   private drawEllipse(shape: Ellipse): void {
     this.graphics
       .ellipse(0, 0, shape.radiusX, shape.radiusY)
-      .fill({ color: shape.color });
+      .fill({ color: 0xffffff });
   }
 
   private drawRandom(shape: RandomShape): void {
-    this.graphics.poly(shape.getPoints()).fill({ color: shape.color });
+    this.graphics.poly(shape.getPoints()).fill({ color: 0xffffff });
   }
 }
