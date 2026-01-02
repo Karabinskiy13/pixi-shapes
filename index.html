@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/png" href="/favicon.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PixiJS - Template</title>
+</head>
+
+<body>
+<div id="app">
+    <div id="ui">
+        <div class="stats">
+            <div>Shapes: <span id="shapes-count">0</span></div>
+            <div>Area: <span id="shapes-area">0</span> px²</div>
+        </div>
+
+        <div class="controls">
+            <div class="control">
+                <span>Shapes/sec</span>
+                <button id="shapes-dec">−</button>
+                <span id="shapes-rate">1</span>
+                <button id="shapes-inc">+</button>
+            </div>
+
+            <div class="control">
+                <span>Gravity</span>
+                <button id="gravity-dec">−</button>
+                <span id="gravity-value">0.3</span>
+                <button id="gravity-inc">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="pixi-container"></div>
+</div>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
